@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Native - DiaJarin by faris</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">DiaJarin <span class="logo-small">by faris</span></a>
+    <div class="nav-links">
+        <a href="index.html">Beranda</a>
+        <a href="php-native.html" class="active">PHP Native</a>
+        <a href="laravel.html">Laravel</a>
+        <a href="biodata.html">Biodata</a>
+    </div>
+    <a href="login.html" class="admin-link">
+        <i class="fas fa-user-shield"></i> Admin
+    </a>
+</nav>
+
+<div class="container">
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <h3>PHP NATIVE</h3>
+            <ul>
+                <li><a href="#part1" class="sidebar-link">1. Login & Auth</a></li>
+                <li><a href="#part2" class="sidebar-link">2. Search & Sort</a></li>
+                <li><a href="#part3" class="sidebar-link">3. Upload File</a></li>
+                <li><a href="#part4" class="sidebar-link">4. Modal & Ajax</a></li>
+                <li><a href="#part5" class="sidebar-link">5. Relasi 2 Tabel</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="content">
+        <div class="identity-box">
+            <h3>Data Diri</h3>
+            <p><strong>Nama:</strong> Faris Faizulhaq Alakiyas</p>
+            <p><strong>Kelas:</strong> XI RPL 2</p>
+            <p><strong>Sekolah:</strong> SMKN 4 Bandung</p>
+        </div>
+
+        <div class="topic-header">
+            <h1>PHP Native CRUD</h1>
+            <p>Belajar membuat aplikasi CRUD (Create, Read, Update, Delete) menggunakan PHP murni tanpa framework.</p>
+        </div>
+
+        <!-- Materi 1 -->
+        <section class="part-section" id="part1">
+            <div class="part-header">
+                <span class="part-badge">Materi 1</span>
+                <h2 class="part-title">Login & Authorization</h2>
+                <div class="part-meta">Praktik · 2026-05-14</div>
+            </div>
+            <div class="part-body">
+                <p>Membangun sistem autentikasi dasar agar hanya pengguna yang sudah login yang bisa mengakses halaman tertentu.</p>
+                
+                <h3>Struktur Database</h3>
+                <div class="code-block">
+                    <pre><code class="language-sql">CREATE TABLE t_login (
+    id_login INT(11) AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100),
+    password VARCHAR(100),
+    level TINYINT(1)
+);
+
+INSERT INTO t_login (username, password, level)
+VALUES ('admin', SHA1('admin'), 1);</code></pre>
+                </div>
+
+                <h3>Logika Login</h3>
+                <div class="code-block">
+                    <pre><code class="language-php">&lt;?php
+session_start();
+$sql = "SELECT * FROM t_login 
+        WHERE username='$username' 
+        AND password=SHA1('$password')";
+if ($data->num_rows != 0) {
+    $_SESSION['username'] = $row->username;
+    header('location: index.php');
+}
+?&gt;</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Tips:</strong> Gunakan SHA1 untuk enkripsi password sederhana. Untuk produksi, gunakan password_hash().
+                </div>
+            </div>
+        </section>
+
+        <!-- Materi 2 -->
+        <section class="part-section" id="part2">
+            <div class="part-header">
+                <span class="part-badge">Materi 2</span>
+                <h2 class="part-title">Searching & Sorting</h2>
+                <div class="part-meta">Praktik · 2026-05-15</div>
+            </div>
+            <div class="part-body">
+                <p>Menambahkan fitur pencarian data dan pengurutan kolom dengan klik panah.</p>
+                
+                <h3>Form Pencarian</h3>
+                <div class="code-block">
+                    <pre><code class="language-php">&lt;form method="GET"&gt;
+    &lt;input type="text" name="search" placeholder="Cari NIS atau Nama"&gt;
+    &lt;button type="submit"&gt;Cari&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;?php
+$search = @$_GET['search'];
+if (!empty($search)) {
+    $sql .= " WHERE nis LIKE '%$search%'
+              OR nama_lengkap LIKE '%$search%' ";
+}
+?&gt;</code></pre>
+                </div>
+
+                <h3>Tombol Sorting</h3>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;th&gt;
+    NIS
+    &lt;a href="?sort=nis&amp;order=asc"&gt;▲&lt;/a&gt;
+    &lt;a href="?sort=nis&amp;order=desc"&gt;▼&lt;/a&gt;
+&lt;/th&gt;</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Penjelasan:</strong> Tanda % di LIKE berarti "mengandung kata tersebut di posisi manapun".
+                </div>
+            </div>
+        </section>
+
+        <!-- Materi 3 -->
+        <section class="part-section" id="part3">
+            <div class="part-header">
+                <span class="part-badge">Materi 3</span>
+                <h2 class="part-title">Upload File</h2>
+                <div class="part-meta">Praktik · 2026-05-16</div>
+            </div>
+            <div class="part-body">
+                <p>Membuat fitur upload foto profil untuk setiap siswa.</p>
+                
+                <h3>Persiapan Database</h3>
+                <div class="code-block">
+                    <pre><code class="language-sql">ALTER TABLE t_siswa ADD COLUMN file VARCHAR(100);</code></pre>
+                </div>
+
+                <h3>Form Upload</h3>
+                <div class="code-block">
+                    <pre><code class="language-php">&lt;form enctype="multipart/form-data" method="POST"&gt;
+    &lt;input type="file" name="foto"&gt;
+    &lt;button type="submit"&gt;Upload&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;?php
+if (!empty($foto) AND $foto['error'] == 0) {
+    $path = "./media/images/";
+    move_uploaded_file($foto['tmp_name'], $path . $foto['name']);
+    $file = $foto['name'];
+}
+?&gt;</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Peringatan:</strong> Pastikan folder media/images/ sudah dibuat sebelum upload.
+                </div>
+            </div>
+        </section>
+
+        <!-- Materi 4 -->
+        <section class="part-section" id="part4">
+            <div class="part-header">
+                <span class="part-badge">Materi 4</span>
+                <h2 class="part-title">Modal & Ajax</h2>
+                <div class="part-meta">Praktik · 2026-05-17</div>
+            </div>
+            <div class="part-body">
+                <p>Mengganti konfirmasi hapus dengan Modal Bootstrap dan proses hapus tanpa reload halaman.</p>
+                
+                <h3>JavaScript dengan Ajax</h3>
+                <div class="code-block">
+                    <pre><code class="language-javascript">$(".btnDelete").on("click", function(e) {
+    e.preventDefault();
+    $(".modal").modal('show');
+    
+    $('.btnYa').on('click', function() {
+        $.ajax({
+            url: href,
+            type: 'POST',
+            success: function(result) {
+                if (result == 1) {
+                    tr.fadeOut();
+                    toastr.success('Data berhasil dihapus');
+                }
+            }
+        });
+    });
+});</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Keuntungan Ajax:</strong> Halaman tidak perlu reload, pengalaman pengguna lebih mulus.
+                </div>
+            </div>
+        </section>
+
+        <!-- Materi 5 -->
+        <section class="part-section" id="part5">
+            <div class="part-header">
+                <span class="part-badge">Materi 5</span>
+                <h2 class="part-title">Relasi 2 Tabel</h2>
+                <div class="part-meta">Praktik · 2026-05-18</div>
+            </div>
+            <div class="part-body">
+                <p>Menghubungkan tabel siswa dengan tabel kelas menggunakan foreign key dan JOIN query.</p>
+                
+                <h3>Membuat Tabel Kelas</h3>
+                <div class="code-block">
+                    <pre><code class="language-sql">CREATE TABLE kelas (
+    id_kelas INT(11) AUTO_INCREMENT PRIMARY KEY,
+    nama_kelas VARCHAR(15),
+    jurusan VARCHAR(50)
+);
+
+ALTER TABLE t_siswa CHANGE kelas id_kelas INT(11);</code></pre>
+                </div>
+
+                <h3>Query dengan INNER JOIN</h3>
+                <div class="code-block">
+                    <pre><code class="language-sql">SELECT * FROM siswa 
+INNER JOIN kelas 
+ON siswa.id_kelas = kelas.id_kelas;</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Konsep:</strong> Relasi tabel memungkinkan data terstruktur dan tidak redundan.
+                </div>
+            </div>
+        </section>
+
+        <div class="references">
+            <h3>Referensi</h3>
+            <ul>
+                <li><a href="#">Modul Pembelajaran PHP Native</a></li>
+                <li><a href="#">Video Tutorial PHP Native</a></li>
+            </ul>
+        </div>
+    </main>
+</div>
+
+<div class="footer">
+    <span>2026 Faris Faizulhaq Alakiyas · XI RPL 2</span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+<script>
+    window.addEventListener('scroll', () => {
+        const winScroll = document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById('scrollProgress').style.width = scrolled + '%';
+    });
+</script>
+</body>
+</html>

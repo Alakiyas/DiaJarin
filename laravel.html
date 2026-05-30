@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel - DiaJarin by faris</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">DiaJarin <span class="logo-small">by faris</span></a>
+    <div class="nav-links">
+        <a href="index.html">Beranda</a>
+        <a href="php-native.html">PHP Native</a>
+        <a href="laravel.html" class="active">Laravel</a>
+        <a href="biodata.html">Biodata</a>
+    </div>
+    <a href="login.html" class="admin-link">
+        <i class="fas fa-user-shield"></i> Admin
+    </a>
+</nav>
+
+<div class="container">
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <h3>LARAVEL</h3>
+            <ul>
+                <li><a href="#intro" class="sidebar-link">Pengenalan Laravel</a></li>
+                <li><a href="#part1" class="sidebar-link">1. Membuat Project</a></li>
+                <li><a href="#part2" class="sidebar-link">2. Database Migration</a></li>
+                <li><a href="#part3" class="sidebar-link">3. Controller & Facade DB</a></li>
+                <li><a href="#part4" class="sidebar-link">4. Create Data</a></li>
+                <li><a href="#part5" class="sidebar-link">5. Edit & Delete</a></li>
+                <li><a href="#part6" class="sidebar-link">6. Eloquent ORM</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="content">
+        <div class="identity-box">
+            <h3>Data Diri</h3>
+            <p><strong>Nama:</strong> Faris Faizulhaq Alakiyas</p>
+            <p><strong>Kelas:</strong> XI RPL 2</p>
+            <p><strong>Sekolah:</strong> SMKN 4 Bandung</p>
+        </div>
+
+        <div class="topic-header">
+            <h1>Laravel Framework</h1>
+            <p>Framework PHP paling populer yang membuat pengembangan web jadi lebih cepat, rapi, dan menyenangkan.</p>
+        </div>
+
+        <!-- Pengenalan -->
+        <section class="part-section" id="intro">
+            <div class="part-header">
+                <span class="part-badge">Pengenalan</span>
+                <h2 class="part-title">Apa Itu Laravel?</h2>
+                <div class="part-meta">Teori · 2026-05-03</div>
+            </div>
+            <div class="part-body">
+                <p>Laravel adalah PHP framework open-source yang mengikuti pola arsitektur MVC (Model-View-Controller). Dibuat oleh Taylor Otwell dan pertama kali dirilis pada tahun 2011.</p>
+                
+                <h3>Fitur Unggulan</h3>
+                <ul class="feature-list">
+                    <li><strong>Artisan CLI</strong> - Command line tools untuk mempercepat development</li>
+                    <li><strong>Eloquent ORM</strong> - Interaksi database dengan gaya OOP</li>
+                    <li><strong>Blade Template</strong> - Template engine yang powerful</li>
+                    <li><strong>Migration</strong> - Version control untuk database</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>MVC Pattern:</strong> Model (Data), View (Tampilan), Controller (Logika) - memisahkan kode agar lebih terstruktur.
+                </div>
+            </div>
+        </section>
+
+        <!-- Membuat Project -->
+        <section class="part-section" id="part1">
+            <div class="part-header">
+                <span class="part-badge">Materi 1</span>
+                <h2 class="part-title">Membuat Project Laravel</h2>
+                <div class="part-meta">Instalasi · 2026-05-07</div>
+            </div>
+            <div class="part-body">
+                <p>Instalasi Laravel sangat mudah dengan Composer.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-bash"># Buat project baru
+composer create-project laravel/laravel nama-project
+
+# Masuk ke folder project
+cd nama-project
+
+# Jalankan server development
+php artisan serve
+
+# Server akan berjalan di http://localhost:8000</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Persiapan:</strong> Pastikan PHP 8.2+ dan Composer sudah terinstall.
+                </div>
+            </div>
+        </section>
+
+        <!-- Database Migration -->
+        <section class="part-section" id="part2">
+            <div class="part-header">
+                <span class="part-badge">Materi 2</span>
+                <h2 class="part-title">Database Migration</h2>
+                <div class="part-meta">Praktik · 2026-04-09</div>
+            </div>
+            <div class="part-body">
+                <p>Migration seperti Git untuk database - melacak perubahan struktur database.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-bash"># Membuat migration
+php artisan make:migration create_t_siswa_table
+
+# Menjalankan migration
+php artisan migrate
+
+# Rollback migration terakhir
+php artisan migrate:rollback</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <pre><code class="language-php">public function up()
+{
+    Schema::create('t_siswa', function (Blueprint $table) {
+        $table->id();
+        $table->integer('nis')->unique();
+        $table->string('nama_lengkap', 100);
+        $table->enum('jenis_kelamin', ['L', 'P']);
+        $table->timestamps();
+    });
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Controller & Facade DB -->
+        <section class="part-section" id="part3">
+            <div class="part-header">
+                <span class="part-badge">Materi 3</span>
+                <h2 class="part-title">Controller & Facade DB</h2>
+                <div class="part-meta">Praktik · 2026-04-12</div>
+            </div>
+            <div class="part-body">
+                <p>Controller adalah jembatan antara Model dan View. Facade DB memudahkan interaksi dengan database.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-bash"># Membuat controller
+php artisan make:controller SiswaController</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <pre><code class="language-php">use Illuminate\Support\Facades\DB;
+
+class SiswaController extends Controller
+{
+    public function index()
+    {
+        $siswa = DB::table('t_siswa')->get();
+        return view('siswa.index', compact('siswa'));
+    }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Create Data -->
+        <section class="part-section" id="part4">
+            <div class="part-header">
+                <span class="part-badge">Materi 4</span>
+                <h2 class="part-title">Create Data</h2>
+                <div class="part-meta">Praktik · 2026-04-16</div>
+            </div>
+            <div class="part-body">
+                <p>Menambahkan data baru ke database. Jangan lupa CSRF protection!</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-php">// Di route web.php
+Route::post('/siswa', [SiswaController::class, 'store']);
+
+// Di Controller
+public function store(Request $request)
+{
+    $request->validate([
+        'nis' => 'required|numeric',
+        'nama_lengkap' => 'required|string'
+    ]);
+    
+    DB::table('t_siswa')->insert($request->all());
+    return redirect('/siswa')->with('success', 'Data berhasil ditambahkan');
+}</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Penting:</strong> Jangan lupa tambahkan @csrf di dalam form Laravel.
+                </div>
+            </div>
+        </section>
+
+        <!-- Edit & Delete -->
+        <section class="part-section" id="part5">
+            <div class="part-header">
+                <span class="part-badge">Materi 5</span>
+                <h2 class="part-title">Edit & Delete Data</h2>
+                <div class="part-meta">Praktik · 2026-04-23</div>
+            </div>
+            <div class="part-body">
+                <p>Update dan hapus data dengan mudah.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-php">// Update data
+DB::table('t_siswa')->where('id', $id)->update($data);
+
+// Delete data
+DB::table('t_siswa')->where('id', $id)->delete();</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eloquent ORM -->
+        <section class="part-section" id="part6">
+            <div class="part-header">
+                <span class="part-badge">Materi 6</span>
+                <h2 class="part-title">Eloquent ORM</h2>
+                <div class="part-meta">Advanced · 2026-04-30</div>
+            </div>
+            <div class="part-body">
+                <p>Eloquent membuat kode database kamu jadi lebih elegant. Setiap tabel punya Model sendiri.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-php">// Membuat Model
+php artisan make:model Siswa
+
+// app/Models/Siswa.php
+class Siswa extends Model
+{
+    protected $table = 't_siswa';
+    protected $fillable = ['nis', 'nama_lengkap', 'jk'];
+}
+
+// Menggunakan Eloquent
+$siswa = Siswa::all();                    // SELECT semua
+$siswa = Siswa::find($id);               // Cari by ID
+$siswa = Siswa::where('jk', 'L')->get(); // Filter
+Siswa::create($request->all());          // Insert
+$siswa->delete();                         // Delete</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Keuntungan Eloquent:</strong> Kode lebih bersih, readable, dan mudah dimaintain.
+                </div>
+            </div>
+        </section>
+
+        <div class="references">
+            <h3>Referensi</h3>
+            <ul>
+                <li><a href="#">Modul Pembelajaran Laravel</a></li>
+                <li><a href="#">Dokumentasi Resmi Laravel</a></li>
+            </ul>
+        </div>
+    </main>
+</div>
+
+<div class="footer">
+    <span>2026 Faris Faizulhaq Alakiyas · XI RPL 2</span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script>
+    window.addEventListener('scroll', () => {
+        const winScroll = document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById('scrollProgress').style.width = scrolled + '%';
+    });
+</script>
+</body>
+</html>

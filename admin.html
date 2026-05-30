@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - DiaJarin by faris</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-wrapper">
+    <div class="admin-card">
+        <div class="admin-header">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Kembali ke Blog</a>
+            <button class="logout-btn" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        
+        <h1 class="admin-title"><i class="fas fa-cog"></i> Panel Admin</h1>
+        <p>Kelola materi tambahan selain PHP Native dan Laravel</p>
+
+        <button class="btn btn-primary btn-add" onclick="showForm()">+ Tambah Materi Baru</button>
+
+        <!-- Form Tambah/Edit Materi -->
+        <div id="pageForm" class="page-form" style="display: none;">
+            <h4 id="formTitle">Tambah Materi Baru</h4>
+            
+            <div class="form-group">
+                <label>Judul Materi <span style="color:red">*</span></label>
+                <input type="text" id="pageTitle" placeholder="Contoh: Pengenalan JavaScript" class="admin-input">
+            </div>
+            
+            <div class="form-group">
+                <label>Sub Judul / Deskripsi Singkat</label>
+                <input type="text" id="pageSubtitle" placeholder="Deskripsi singkat tentang materi ini" class="admin-input">
+            </div>
+            
+            <div class="form-group">
+                <label>Kategori</label>
+                <select id="pageCategory" class="admin-input">
+                    <option value="other">Materi Tambahan</option>
+                </select>
+                <small>Materi akan muncul di sidebar sebagai kategori terpisah</small>
+            </div>
+            
+            <div class="form-group">
+                <label>Slug (URL identifier)</label>
+                <input type="text" id="pageSlug" placeholder="pengenalan-javascript" class="admin-input">
+                <small>Kosongkan untuk otomatis dari judul</small>
+            </div>
+            
+            <div class="form-group">
+                <label>Konten Materi (HTML)</label>
+                <textarea id="pageContent" rows="12" class="admin-textarea" placeholder='Tulis konten materi di sini. Gunakan format HTML seperti contoh berikut:
+
+<h2>Judul Section</h2>
+<p>Paragraf penjelasan...</p>
+
+<div class="code-block">
+<pre><code class="language-php">kode program di sini</code></pre>
+</div>
+
+<div class="info-box">
+<strong>Tips:</strong> Informasi penting di sini
+</div>'></textarea>
+                <small>Gunakan tag HTML: h2 untuk sub judul, p untuk paragraf, div class="code-block" untuk kode, div class="info-box" untuk tips</small>
+            </div>
+            
+            <div class="form-buttons">
+                <button class="btn btn-primary" onclick="savePage()">Simpan Materi</button>
+                <button class="btn btn-secondary" onclick="hideForm()">Batal</button>
+            </div>
+        </div>
+
+        <!-- Preview Template -->
+        <div class="template-preview">
+            <h4><i class="fas fa-eye"></i> Preview Format Penulisan</h4>
+            <div class="preview-content">
+                <div class="preview-item">
+                    <code>&lt;h2&gt;Judul Section&lt;/h2&gt;</code>
+                    <span>→ Untuk judul besar dalam materi</span>
+                </div>
+                <div class="preview-item">
+                    <code>&lt;h3&gt;Sub Judul&lt;/h3&gt;</code>
+                    <span>→ Untuk judul kecil / sub section</span>
+                </div>
+                <div class="preview-item">
+                    <code>&lt;div class="code-block"&gt;&lt;pre&gt;&lt;code class="language-php"&gt;...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</code>
+                    <span>→ Untuk menampilkan kode program</span>
+                </div>
+                <div class="preview-item">
+                    <code>&lt;div class="info-box"&gt;&lt;strong&gt;Tips:&lt;/strong&gt; isi tips di sini&lt;/div&gt;</code>
+                    <span>→ Untuk menampilkan kotak informasi/tips</span>
+                </div>
+                <div class="preview-item">
+                    <code>&lt;ul&gt;&lt;li&gt;item 1&lt;/li&gt;&lt;li&gt;item 2&lt;/li&gt;&lt;/ul&gt;</code>
+                    <span>→ Untuk daftar bullet point</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daftar Materi -->
+        <div class="page-list">
+            <h4><i class="fas fa-list"></i> Daftar Materi Tambahan</h4>
+            <div id="pagesList"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let pages = [];
+    let editId = null;
+
+    function checkAuth() {
+        if (localStorage.getItem('diajarin_admin_logged') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    }
+
+    function loadData() {
+        const stored = localStorage.getItem('diajarin_pages');
+        if (stored) {
+            pages = JSON.parse(stored);
+        } else {
+            pages = [
+                {
+                    id: 1,
+                    title: "Pengenalan JavaScript",
+                    subtitle: "Dasar-dasar JavaScript untuk pemula",
+                    category: "other",
+                    slug: "pengenalan-javascript",
+                    content: `<h2>Apa itu JavaScript?</h2>
+<p>JavaScript adalah bahasa pemrograman yang digunakan untuk membuat halaman web menjadi interaktif.</p>
+<div class="code-block">
+<pre><code class="language-javascript">console.log("Hello World!");</code></pre>
+</div>
+<div class="info-box">
+<strong>Tips:</strong> JavaScript bisa dijalankan di browser tanpa perlu instalasi apa pun.
+</div>`,
+                    createdAt: "2026-05-20"
+                }
+            ];
+            saveData();
+        }
+        renderList();
+    }
+
+    function saveData() {
+        localStorage.setItem('diajarin_pages', JSON.stringify(pages));
+    }
+
+    function renderList() {
+        const container = document.getElementById('pagesList');
+        const otherPages = pages.filter(p => p.category === 'other');
+        
+        if (otherPages.length === 0) {
+            container.innerHTML = '<p class="empty">Belum ada materi tambahan. Klik "Tambah Materi Baru"</p>';
+            return;
+        }
+        
+        container.innerHTML = otherPages.map(p => `
+            <div class="page-row">
+                <div class="page-info">
+                    <strong>${escapeHtml(p.title)}</strong>
+                    <div class="page-meta">${p.subtitle || ''}</div>
+                </div>
+                <div class="row-actions">
+                    <button class="btn-edit" onclick="editPage(${p.id})"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="btn-delete" onclick="deletePage(${p.id})"><i class="fas fa-trash"></i> Hapus</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function showForm() {
+        editId = null;
+        document.getElementById('formTitle').innerText = 'Tambah Materi Baru';
+        document.getElementById('pageTitle').value = '';
+        document.getElementById('pageSubtitle').value = '';
+        document.getElementById('pageSlug').value = '';
+        document.getElementById('pageContent').value = '';
+        document.getElementById('pageForm').style.display = 'block';
+        document.getElementById('pageForm').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('pageTitle').focus();
+    }
+
+    function hideForm() {
+        document.getElementById('pageForm').style.display = 'none';
+        editId = null;
+    }
+
+    function editPage(id) {
+        const page = pages.find(p => p.id === id);
+        if (page) {
+            editId = id;
+            document.getElementById('formTitle').innerText = 'Edit Materi';
+            document.getElementById('pageTitle').value = page.title;
+            document.getElementById('pageSubtitle').value = page.subtitle || '';
+            document.getElementById('pageSlug').value = page.slug;
+            document.getElementById('pageContent').value = page.content || '';
+            document.getElementById('pageForm').style.display = 'block';
+            document.getElementById('pageForm').scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function savePage() {
+        const title = document.getElementById('pageTitle').value.trim();
+        const subtitle = document.getElementById('pageSubtitle').value.trim();
+        let slug = document.getElementById('pageSlug').value.trim();
+        const content = document.getElementById('pageContent').value;
+
+        if (!title) {
+            alert('Judul materi harus diisi');
+            document.getElementById('pageTitle').focus();
+            return;
+        }
+
+        if (!slug) {
+            slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        }
+
+        const now = new Date().toISOString().split('T')[0];
+
+        if (editId) {
+            const index = pages.findIndex(p => p.id === editId);
+            if (index !== -1) {
+                pages[index] = {
+                    ...pages[index],
+                    title,
+                    subtitle,
+                    slug,
+                    content,
+                    updatedAt: now
+                };
+            }
+            alert('Materi berhasil diupdate');
+        } else {
+            const newId = pages.length > 0 ? Math.max(...pages.map(p => p.id)) + 1 : 1;
+            pages.push({
+                id: newId,
+                title,
+                subtitle,
+                category: 'other',
+                slug,
+                content,
+                createdAt: now,
+                updatedAt: now
+            });
+            alert('Materi baru berhasil ditambahkan');
+        }
+        
+        saveData();
+        renderList();
+        hideForm();
+    }
+
+    function deletePage(id) {
+        if (confirm('Yakin ingin menghapus materi ini?')) {
+            pages = pages.filter(p => p.id !== id);
+            saveData();
+            renderList();
+            alert('Materi dihapus');
+        }
+    }
+
+    function adminLogout() {
+        localStorage.removeItem('diajarin_admin_logged');
+        window.location.href = 'login.html';
+    }
+
+    checkAuth();
+    loadData();
+</script>
+</body>
+</html>

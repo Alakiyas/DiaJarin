@@ -1,0 +1,1451 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f0;
+    color: #1a1a2e;
+    line-height: 1.6;
+}
+
+/* Scroll Progress */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #f97316;
+    z-index: 1001;
+    transition: width 0.1s;
+}
+
+/* Navbar */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: white;
+    border-bottom: 1px solid #e5e5e0;
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f97316;
+    text-decoration: none;
+}
+
+.logo-small {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #6b7280;
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #4a4a4a;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    background: #fff7ed;
+    color: #f97316;
+}
+
+.admin-link {
+    background: #1f2937;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.admin-link:hover {
+    background: #f97316;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #f97316;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #ea580c;
+}
+
+.btn-secondary {
+    background: #334155;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #1e293b;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem;
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    border: 1px solid #e5e5e0;
+}
+
+.sidebar-section {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar h3 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #f97316;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e5e0;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #4a4a4a;
+    display: block;
+    padding: 0.35rem 0;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.sidebar a:hover {
+    color: #f97316;
+    padding-left: 0.25rem;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid #e5e5e0;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Identity Box */
+.identity-box {
+    background: #fff7ed;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #f97316;
+}
+
+.identity-box h3 {
+    color: #f97316;
+    margin-bottom: 0.5rem;
+}
+
+/* Topic Header */
+.topic-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f97316;
+}
+
+.topic-header h1 {
+    font-size: 1.8rem;
+    color: #1a1a2e;
+}
+
+/* Part Section */
+.part-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e5e0;
+}
+
+.part-section:last-child {
+    border-bottom: none;
+}
+
+.part-header {
+    margin-bottom: 1rem;
+}
+
+.part-badge {
+    display: inline-block;
+    background: #f97316;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.part-title {
+    font-size: 1.5rem;
+    margin: 0.25rem 0;
+    color: #1a1a2e;
+}
+
+.part-meta {
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+.part-body h3 {
+    font-size: 1.1rem;
+    margin: 1rem 0 0.5rem 0;
+    color: #f97316;
+}
+
+/* Code Block */
+.code-block {
+    background: #0f172a;
+    border-radius: 10px;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.code-block pre {
+    margin: 0;
+    padding: 1rem;
+}
+
+.code-block code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+}
+
+/* Info Box */
+.info-box {
+    background: #fff7ed;
+    border-left: 4px solid #f97316;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+
+/* Feature List */
+.feature-list {
+    margin: 1rem 0 0 1.5rem;
+}
+
+.feature-list li {
+    margin: 0.5rem 0;
+}
+
+/* References */
+.references {
+    background: #f8f8f5;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.references h3 {
+    font-size: 0.9rem;
+    color: #f97316;
+    margin-bottom: 0.5rem;
+}
+
+.references ul {
+    margin-left: 1.5rem;
+}
+
+.references a {
+    color: #4a4a4a;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.references a:hover {
+    color: #f97316;
+}
+
+/* Fun Fact Section (Index) */
+.funfact-section {
+    flex: 1;
+}
+
+.funfact-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.section-desc {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 2rem;
+}
+
+.funfact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.funfact-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid #e5e5e0;
+    transition: transform 0.2s;
+}
+
+.funfact-card:hover {
+    transform: translateY(-4px);
+}
+
+.card-icon {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.php-card .card-icon { color: #787cb5; }
+.laravel-card .card-icon { color: #f97316; }
+
+.funfact-card h3 {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.fact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.fact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.fact-number {
+    background: #f97316;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.fact-item p {
+    font-size: 0.85rem;
+    color: #4a4a4a;
+    margin: 0;
+}
+
+/* Stats Section */
+.stats-section {
+    background: #1a1a2e;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.stat-box {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f97316;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid #e5e5e0;
+    color: #94a3b8;
+    font-size: 0.7rem;
+}
+
+/* Biodata Page */
+.biodata-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.biodata-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.avatar i {
+    font-size: 5rem;
+    color: #f97316;
+}
+
+.biodata-header h1 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+}
+
+.biodata-header .role {
+    color: #6b7280;
+}
+
+.biodata-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.biodata-card {
+    background: #f8f8f5;
+    padding: 1.25rem;
+    border-radius: 12px;
+}
+
+.biodata-card h3 {
+    color: #f97316;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.biodata-card ul {
+    list-style: none;
+}
+
+.biodata-card li {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.biodata-card li i {
+    width: 20px;
+    color: #f97316;
+}
+
+/* Login Page */
+.login-body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-wrapper {
+    width: 100%;
+    padding: 1rem;
+}
+
+.login-card {
+    max-width: 400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.login-logo i {
+    font-size: 2.5rem;
+    color: #f97316;
+}
+
+.login-logo h1 {
+    font-size: 1.6rem;
+    margin: 0.25rem 0;
+    color: #1a1a2e;
+}
+
+.login-logo span {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+.login-header p {
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+.login-form {
+    margin: 1.5rem 0;
+}
+
+.login-form .form-group {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.login-form label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #e5e5e0;
+    border-radius: 8px;
+    font-family: inherit;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 0.7rem;
+    background: #f97316;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.btn-login:hover {
+    background: #ea580c;
+}
+
+.demo-info {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-top: 1rem;
+}
+
+.login-footer {
+    padding-top: 1rem;
+    border-top: 1px solid #e5e5e0;
+}
+
+.login-footer .back-link {
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.login-footer .back-link:hover {
+    color: #f97316;
+}
+
+/* Admin Page */
+.admin-body {
+    background: #f5f5f0;
+}
+
+.admin-wrapper {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.admin-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e5e0;
+}
+
+.admin-header .back-link {
+    text-decoration: none;
+    color: #6b7280;
+}
+
+.admin-header .back-link:hover {
+    color: #f97316;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.admin-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+}
+
+.admin-title i {
+    color: #f97316;
+}
+
+.btn-add {
+    margin: 1rem 0;
+}
+
+.page-form {
+    background: #f8f8f5;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.page-form h4 {
+    margin-bottom: 1rem;
+}
+
+.page-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e5e5e0;
+    border-radius: 8px;
+    font-family: monospace;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.page-list h4 {
+    margin-bottom: 1rem;
+}
+
+.page-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid #f0f0e8;
+}
+
+.row-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-edit {
+    background: #f97316;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.empty {
+    text-align: center;
+    color: #94a3b8;
+    padding: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+    }
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    .funfact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Admin Form Styles */
+.admin-input {
+    width: 100%;
+    padding: 0.65rem;
+    border: 1px solid #e5e5e0;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+}
+
+.admin-textarea {
+    width: 100%;
+    padding: 0.65rem;
+    border: 1px solid #e5e5e0;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    resize: vertical;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: #1a1a2e;
+}
+
+.form-group small {
+    display: block;
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+}
+
+/* Subbab List */
+#subbabList {
+    margin-bottom: 0.5rem;
+}
+
+.subbab-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.subbab-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #e5e5e0;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+}
+
+.btn-remove-subbab {
+    background: #ef4444;
+    color: white;
+    border: none;
+    width: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-add-subbab {
+    background: #f97316;
+    color: white;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+/* Template Preview */
+.template-preview {
+    background: #f8f8f5;
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+}
+
+.template-preview h4 {
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: #f97316;
+}
+
+.preview-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.preview-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.preview-item code {
+    background: #1a1a2e;
+    color: #f97316;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+}
+
+.preview-item span {
+    color: #6b7280;
+}
+
+/* Page Row untuk daftar materi */
+.page-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem;
+    border-bottom: 1px solid #f0f0e8;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.page-info {
+    flex: 1;
+}
+
+.page-info strong {
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.page-meta {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.page-badge {
+    display: inline-block;
+    background: #f97316;
+    color: white;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+}
+
+.row-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-edit, .btn-delete {
+    padding: 0.3rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.btn-edit {
+    background: #f97316;
+    color: white;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+}
+
+/* Custom menu subbab indent */
+.subbab-item {
+    margin-left: 1rem !important;
+    font-size: 0.8rem !important;
+}
+
+.subbab-item a {
+    font-size: 0.75rem !important;
+    color: #6b7280 !important;
+}
+
+.subbab-item a:hover {
+    color: #f97316 !important;
+}
+
+/* Custom content body */
+.custom-content-body h2 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.75rem 0;
+    color: #1a1a2e;
+    border-left: 3px solid #f97316;
+    padding-left: 0.75rem;
+}
+
+.custom-content-body h3 {
+    font-size: 1.1rem;
+    margin: 1rem 0 0.5rem 0;
+    color: #f97316;
+}
+
+.custom-content-body p {
+    margin: 0.75rem 0;
+    line-height: 1.7;
+}
+
+.custom-content-body ul, .custom-content-body ol {
+    margin: 0.75rem 0 0.75rem 1.5rem;
+}
+
+.custom-content-body li {
+    margin: 0.25rem 0;
+}
+
+/* Sub Bab Container */
+#subbabContainer {
+    background: #f8f8f5;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+}
+
+.subbab-list {
+    min-height: 60px;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.subbab-empty {
+    text-align: center;
+    color: #94a3b8;
+    padding: 1rem;
+    font-size: 0.8rem;
+    background: white;
+    border-radius: 8px;
+}
+
+/* Item Sub Bab yang Bisa Diedit */
+.subbab-item-editable {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border: 1px solid #e5e5e0;
+    transition: all 0.2s;
+    cursor: grab;
+}
+
+.subbab-item-editable.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.subbab-item-editable:hover {
+    border-color: #f97316;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.subbab-drag-handle {
+    color: #cbd5e1;
+    cursor: grab;
+    font-size: 0.9rem;
+}
+
+.subbab-drag-handle i {
+    pointer-events: none;
+}
+
+.subbab-name {
+    flex: 1;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #1a1a2e;
+}
+
+.subbab-name span {
+    display: block;
+    padding: 0.2rem 0;
+}
+
+.subbab-name:hover {
+    color: #f97316;
+}
+
+.subbab-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.subbab-btn-edit, .subbab-btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0.3rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.subbab-btn-edit {
+    color: #f97316;
+}
+
+.subbab-btn-edit:hover {
+    background: #fff7ed;
+}
+
+.subbab-btn-delete {
+    color: #ef4444;
+}
+
+.subbab-btn-delete:hover {
+    background: #fef2f2;
+}
+
+/* Area Tambah Sub Bab Baru */
+.subbab-add {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #e5e5e0;
+}
+
+.subbab-input-new {
+    flex: 1;
+    padding: 0.6rem;
+    border: 1px solid #e5e5e0;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+}
+
+.subbab-input-new:focus {
+    outline: none;
+    border-color: #f97316;
+}
+
+.btn-add-subbab {
+    background: #f97316;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-add-subbab:hover {
+    background: #ea580c;
+}
+
+/* Modal Edit Sub Bab */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 450px;
+    overflow: hidden;
+    animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: #f97316;
+    color: white;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    border-top: 1px solid #e5e5e0;
+    background: #f8f8f5;
+}
+
+/* Sub Bab Container */
+#subbabContainer {
+    background: #f8f8f5;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+}
+
+.subbab-list {
+    min-height: 80px;
+    max-height: 280px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    border: 1px dashed #e5e5e0;
+    border-radius: 8px;
+    background: white;
+    padding: 0.5rem;
+}
+
+.subbab-empty {
+    text-align: center;
+    color: #94a3b8;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    background: #fafafa;
+    border-radius: 8px;
+}
+
+/* Item Sub Bab yang Bisa DIISI */
+.subbab-item-editable {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border: 1px solid #e5e5e0;
+    transition: all 0.2s;
+    cursor: grab;
+}
+
+.subbab-item-editable.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.subbab-item-editable:hover {
+    border-color: #f97316;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.subbab-drag-handle {
+    color: #cbd5e1;
+    cursor: grab;
+    font-size: 0.9rem;
+}
+
+.subbab-drag-handle i {
+    pointer-events: none;
+}
+
+.subbab-name {
+    flex: 1;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #1a1a2e;
+}
+
+.subbab-name span {
+    display: block;
+    padding: 0.2rem 0;
+}
+
+.subbab-name:hover {
+    color: #f97316;
+}
+
+.subbab-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.subbab-btn-edit, .subbab-btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0.3rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.subbab-btn-edit {
+    color: #f97316;
+}
+
+.subbab-btn-edit:hover {
+    background: #fff7ed;
+}
+
+.subbab-btn-delete {
+    color: #ef4444;
+}
+
+.subbab-btn-delete:hover {
+    background: #fef2f2;
+}
+
+/* Area Tambah Sub Bab Baru */
+.subbab-add {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #e5e5e0;
+}
+
+.subbab-input-new {
+    flex: 1;
+    padding: 0.6rem;
+    border: 1px solid #e5e5e0;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+}
+
+.subbab-input-new:focus {
+    outline: none;
+    border-color: #f97316;
+}
+
+.btn-add-subbab {
+    background: #f97316;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-add-subbab:hover {
+    background: #ea580c;
+}
+
+/* Modal Edit Sub Bab */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 450px;
+    overflow: hidden;
+    animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: #f97316;
+    color: white;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    border-top: 1px solid #e5e5e0;
+    background: #f8f8f5;
+}
