@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - DiaJarin by faris</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+
+<div class="login-wrapper">
+    <div class="login-card">
+        <div class="login-header">
+            <div class="login-logo">
+                <i class="fas fa-book-open"></i>
+                <h1>DiaJarin</h1>
+                <span>by faris</span>
+            </div>
+            <p>Masuk ke Panel Administrator</p>
+        </div>
+        
+        <div class="login-form">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="loginUsername" placeholder="admin">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="password">
+            </div>
+            <button class="btn-login" onclick="processLogin()">Masuk</button>
+            <p class="demo-info">Demo: admin / admin123</p>
+        </div>
+        
+        <div class="login-footer">
+            <a href="index.html" class="back-link">Kembali ke Blog</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function processLogin() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        if (username === 'admin' && password === 'admin123') {
+            localStorage.setItem('diajarin_admin_logged', 'true');
+            window.location.href = 'admin.html';
+        } else {
+            alert('Username atau password salah!');
+        }
+    }
+    
+    document.getElementById('loginPassword').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') processLogin();
+    });
+</script>
+</body>
+</html>
